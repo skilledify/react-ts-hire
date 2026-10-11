@@ -18,7 +18,7 @@ function BurgerButton({ open, onClick }: BurgerButtonProps) {
       onClick={onClick}
       aria-label={open ? 'Close menu' : 'Open menu'}
       aria-expanded={open}
-      className="relative z-[60] flex h-11 w-11 cursor-pointer flex-col items-center justify-center gap-[7px] rounded-full border border-accent/40 transition-colors hover:border-accent lg:hidden"
+      className="relative z-[60] flex h-10 w-10 shrink-0 cursor-pointer flex-col items-center justify-center gap-[7px] rounded-full border border-accent/40 transition-colors hover:border-accent lg:hidden"
     >
       <motion.span
         animate={open ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
@@ -46,7 +46,7 @@ export default function Header() {
 
   return (
     <header className="relative z-50">
-      <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-5 px-4 py-5 md:py-8">
+      <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-2 px-4 py-5 sm:gap-5 md:py-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -54,7 +54,7 @@ export default function Header() {
           className="shrink-0"
         >
           <Link to={AppRoutes.HOME_PAGE} aria-label="Hire — home page">
-            <img src={asset('/img/logo.svg')} alt="Hire" className="h-10 w-auto md:h-12" />
+            <img src={asset('/img/logo.svg')} alt="Hire" className="h-9 w-auto md:h-12" />
           </Link>
         </motion.div>
 
@@ -93,7 +93,7 @@ export default function Header() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="hidden items-center gap-2 sm:flex"
+          className="flex shrink-0 items-center gap-1.5 sm:gap-2"
         >
           {user ? (
             <>
@@ -103,7 +103,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={logout}
-                className="cursor-pointer border-2 border-accent px-5 py-[10px] font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white"
+                className="cursor-pointer whitespace-nowrap border-2 border-accent px-2.5 py-[9px] text-sm font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white sm:px-5 sm:py-[10px] sm:text-base"
               >
                 Log out
               </button>
@@ -112,13 +112,13 @@ export default function Header() {
             <>
               <Link
                 to={AppRoutes.LOGIN_PAGE}
-                className="cursor-pointer border-2 border-accent px-5 py-[10px] font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white"
+                className="cursor-pointer whitespace-nowrap border-2 border-accent px-2.5 py-[9px] text-sm font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white sm:px-5 sm:py-[10px] sm:text-base"
               >
                 Login
               </Link>
               <Link
                 to={AppRoutes.SIGNUP_PAGE}
-                className="cursor-pointer border-2 border-accent bg-accent px-5 py-[10px] font-medium text-white transition-colors duration-200 hover:bg-transparent hover:text-cream"
+                className="cursor-pointer whitespace-nowrap border-2 border-accent bg-accent px-2.5 py-[9px] text-sm font-medium text-white transition-colors duration-200 hover:bg-transparent hover:text-cream sm:px-5 sm:py-[10px] sm:text-base"
               >
                 Sign Up
               </Link>
