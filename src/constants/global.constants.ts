@@ -9,6 +9,8 @@ export const AppRoutes = {
   RENTING_PAGE: '/renting',
   SELLING_PAGE: '/selling',
   CONTACT_PAGE: '/contact',
+  LOGIN_PAGE: '/login',
+  SIGNUP_PAGE: '/signup',
   NOTFOUND_PAGE: '*',
 } as const;
 

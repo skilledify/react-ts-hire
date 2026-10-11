@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router'
 import { navLinks } from '../data/site'
 import useLockBody from '../hooks/useLockBody'
 import { AppRoutes } from '../constants/global.constants'
+import { useAuth } from '../context/AuthContext'
 
 interface BurgerButtonProps {
   open: boolean
@@ -40,6 +41,7 @@ function BurgerButton({ open, onClick }: BurgerButtonProps) {
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const { user, logout } = useAuth()
   useLockBody(open)
 
   return (
@@ -93,18 +95,35 @@ export default function Header() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="hidden items-center gap-2 sm:flex"
         >
-          <button
-            type="button"
-            className="cursor-pointer border-2 border-accent px-5 py-[10px] font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white"
-          >
-            Login
-          </button>
-          <button
-            type="button"
-            className="cursor-pointer border-2 border-accent bg-accent px-5 py-[10px] font-medium text-white transition-colors duration-200 hover:bg-transparent hover:text-cream"
-          >
-            Sign Up
-          </button>
+          {user ? (
+            <>
+              <span className="hidden text-base text-mist md:inline">
+                Hi, {user.name}
+              </span>
+              <button
+                type="button"
+                onClick={logout}
+                className="cursor-pointer border-2 border-accent px-5 py-[10px] font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to={AppRoutes.LOGIN_PAGE}
+                className="cursor-pointer border-2 border-accent px-5 py-[10px] font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white"
+              >
+                Login
+              </Link>
+              <Link
+                to={AppRoutes.SIGNUP_PAGE}
+                className="cursor-pointer border-2 border-accent bg-accent px-5 py-[10px] font-medium text-white transition-colors duration-200 hover:bg-transparent hover:text-cream"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </motion.div>
 
         <BurgerButton open={open} onClick={() => setOpen((v) => !v)} />
@@ -156,18 +175,35 @@ export default function Header() {
                 transition={{ delay: 0.5, duration: 0.4 }}
                 className="mt-8 flex gap-3"
               >
-                <button
-                  type="button"
-                  className="cursor-pointer border-2 border-white px-6 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent"
-                >
-                  Login
-                </button>
-                <button
-                  type="button"
-                  className="cursor-pointer border-2 border-white bg-white px-6 py-2 font-medium text-accent transition-colors hover:bg-transparent hover:text-white"
-                >
-                  Sign Up
-                </button>
+                {user ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout()
+                      setOpen(false)
+                    }}
+                    className="cursor-pointer border-2 border-white px-6 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent"
+                  >
+                    Log out
+                  </button>
+                ) : (
+                  <>
+                    <Link
+                      to={AppRoutes.LOGIN_PAGE}
+                      onClick={() => setOpen(false)}
+                      className="cursor-pointer border-2 border-white px-6 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to={AppRoutes.SIGNUP_PAGE}
+                      onClick={() => setOpen(false)}
+                      className="cursor-pointer border-2 border-white bg-white px-6 py-2 font-medium text-accent transition-colors hover:bg-transparent hover:text-white"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </motion.div>
             </motion.nav>
           </>
