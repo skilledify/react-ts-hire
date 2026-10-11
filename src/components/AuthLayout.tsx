@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router'
-import { SITE_META } from '../constants/global.constants'
+import { SITE_META, asset } from '../constants/global.constants'
 
 interface AuthLayoutProps {
   title: string
@@ -35,7 +35,7 @@ export default function AuthLayout({
           className="hidden lg:block"
         >
           <Link to="/" aria-label="Hire — home page">
-            <img src="/img/logo.svg" alt="Hire" className="h-12 w-auto" />
+            <img src={asset('/img/logo.svg')} alt="Hire" className="h-12 w-auto" />
           </Link>
           <h2 className="mt-8 text-[clamp(1.75rem,1.3rem+2.2vw,3rem)] font-semibold capitalize leading-[1.2]">
             {SITE_META.TAGLINE}
@@ -66,7 +66,7 @@ export default function AuthLayout({
         >
           <div className="lg:hidden">
             <Link to="/" aria-label="Hire — home page" className="inline-block">
-              <img src="/img/logo.svg" alt="Hire" className="h-10 w-auto" />
+              <img src={asset('/img/logo.svg')} alt="Hire" className="h-10 w-auto" />
             </Link>
           </div>
           <h1 className="mt-6 text-[clamp(1.75rem,1.4rem+1.6vw,2.5rem)] font-semibold capitalize lg:mt-0">

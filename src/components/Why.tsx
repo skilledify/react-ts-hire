@@ -1,19 +1,20 @@
 import { motion } from 'framer-motion'
 import Reveal from './Reveal'
+import { asset } from '../constants/global.constants'
 
 const items = [
   {
-    icon: '/img/icons/search.svg',
+    icon: asset('/img/icons/search.svg'),
     title: 'Easy to find',
     text: 'Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.',
   },
   {
-    icon: '/img/icons/price.svg',
+    icon: asset('/img/icons/price.svg'),
     title: 'Affordable Prices',
     text: 'Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.',
   },
   {
-    icon: '/img/icons/timer.svg',
+    icon: asset('/img/icons/timer.svg'),
     title: 'Quickly Process',
     text: 'Urna, massa aliqua dui pellentesque. Ac, gravida in. Diam vitae, nec mattis lectus quam pretium amet facilisis.',
   },

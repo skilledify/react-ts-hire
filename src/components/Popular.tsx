@@ -5,7 +5,7 @@ import { properties } from '../data/site'
 import type { Property } from '../data/site'
 import { AreaIcon, BathIcon, BedIcon } from './icons'
 import Reveal from './Reveal'
-import { AppRoutes } from '../constants/global.constants'
+import { AppRoutes, asset } from '../constants/global.constants'
 
 const cardWidth = 'w-[86vw] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]'
 
@@ -70,7 +70,7 @@ function ArrowButton({ direction, onClick }: ArrowButtonProps) {
       className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-white/80 bg-transparent transition-colors duration-200 hover:border-accent hover:bg-accent md:h-[78px] md:w-[78px]"
     >
       <img
-        src="/img/icons/arrow-slider.svg"
+        src={asset('/img/icons/arrow-slider.svg')}
         alt=""
         className={`h-[22px] w-[14px] ${direction === 'next' ? 'rotate-180' : ''}`}
       />
@@ -93,7 +93,7 @@ export default function Popular() {
     <section
       id="popular"
       className="bg-ink-soft bg-cover bg-center py-16 md:py-28"
-      style={{ backgroundImage: "url('/img/slider-bg.png')" }}
+      style={{ backgroundImage: `url("${asset('/img/slider-bg.png')}")` }}
     >
       <div className="mx-auto max-w-[1450px] px-4">
         <div className="flex flex-wrap items-end justify-between gap-6">

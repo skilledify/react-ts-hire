@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { reviews } from '../data/site'
+import { asset } from '../constants/global.constants'
 
 interface ReviewArrowProps {
   direction: 'prev' | 'next'
@@ -41,7 +42,7 @@ export default function Reviews() {
   return (
     <section className="relative overflow-hidden pb-20 md:pb-40">
       <motion.img
-        src="/img/reviews-deco.svg"
+        src={asset('/img/reviews-deco.svg')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, x: -60 }}

@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Link, NavLink } from 'react-router'
 import { navLinks } from '../data/site'
 import useLockBody from '../hooks/useLockBody'
-import { AppRoutes } from '../constants/global.constants'
+import { AppRoutes, asset } from '../constants/global.constants'
 import { useAuth } from '../context/AuthContext'
 
 interface BurgerButtonProps {
@@ -54,7 +54,7 @@ export default function Header() {
           className="shrink-0"
         >
           <Link to={AppRoutes.HOME_PAGE} aria-label="Hire — home page">
-            <img src="/img/logo.svg" alt="Hire" className="h-10 w-auto md:h-12" />
+            <img src={asset('/img/logo.svg')} alt="Hire" className="h-10 w-auto md:h-12" />
           </Link>
         </motion.div>
 

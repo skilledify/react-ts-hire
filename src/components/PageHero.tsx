@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Breadcrumbs from './Breadcrumbs'
+import { asset } from '../constants/global.constants'
 
 interface PageHeroProps {
   title: string
@@ -15,7 +16,7 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
   return (
     <section className="relative overflow-hidden bg-ink-soft pb-16 pt-10 md:pb-24 md:pt-14">
       <motion.img
-        src="/img/hero-deco.svg"
+        src={asset('/img/hero-deco.svg')}
         alt=""
         aria-hidden="true"
         initial={{ opacity: 0, x: 80 }}

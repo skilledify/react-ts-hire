@@ -5,7 +5,7 @@ import Reveal from '../components/Reveal'
 import AnimatedNumber from '../components/AnimatedNumber'
 import { stats, team, timeline, values } from '../data/site'
 import type { Stat, TeamMember, TimelineItem, ValueItem } from '../data/site'
-import { AppRoutes } from '../constants/global.constants'
+import { AppRoutes, asset } from '../constants/global.constants'
 
 /* ---------------------------------- Секции ---------------------------------- */
 
@@ -40,7 +40,7 @@ function StorySection() {
       <div className="mx-auto grid max-w-[1450px] items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16">
         <Reveal>
           <img
-            src="/img/gallery/1.jpg"
+            src={asset('/img/gallery/1.jpg')}
             alt="Hire office team at work"
             className="w-full object-cover"
           />

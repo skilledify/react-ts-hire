@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { filterConfig } from '../data/site'
+import { asset } from '../constants/global.constants'
 import FilterSelect from './FilterSelect'
 
 export default function Hero() {
@@ -24,7 +25,7 @@ export default function Hero() {
           FilterSelect dropdowns (which must overflow past the section bottom). */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.img
-          src="/img/hero-deco.svg"
+          src={asset('/img/hero-deco.svg')}
           alt=""
           aria-hidden="true"
           initial={{ opacity: 0, x: 80 }}
@@ -33,7 +34,7 @@ export default function Hero() {
           className="absolute -bottom-40 right-0 z-0 hidden h-[500px] select-none xl:block"
         />
         <motion.img
-          src="/img/hero-deco.svg"
+          src={asset('/img/hero-deco.svg')}
           alt=""
           aria-hidden="true"
           className="absolute -bottom-24 right-0 z-0 hidden h-72 select-none md:block xl:hidden"
@@ -69,7 +70,7 @@ export default function Hero() {
           className="w-full lg:justify-self-end"
         >
           <img
-            src="/img/hero.jpg"
+            src={asset('/img/hero.jpg')}
             alt="Modern family house"
             className="h-[420px] w-full object-cover object-center md:h-[520px]"
           />

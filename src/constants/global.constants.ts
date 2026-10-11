@@ -33,3 +33,18 @@ export const SITE_META = {
   DESCRIPTION:
     'Hire is a full-cycle real estate agency: verified listings, transparent pricing and one dedicated advisor for buying, renting and selling.',
 } as const;
+
+/**
+ * Путь к статике из `public/`.
+ *
+ * Vite НЕ перезаписывает абсолютные пути вида `/img/...` внутри JSX и CSS
+ * (перезапись работает только для `index.html` и для `import` ассетов), поэтому
+ * при `base: '/react-ts-hire'` такие ссылки вели в корень домена и давали 404.
+ * `import.meta.env.BASE_URL` содержит base, но завершающий слеш в нём не
+ * гарантирован, поэтому нормализуем его сами — тогда путь корректен и в dev,
+ * и на GitHub Pages.
+ *
+ * @example asset('/img/hero.jpg') // → '/react-ts-hire/img/hero.jpg'
+ */
+export const asset = (path: string): string =>
+  `${import.meta.env.BASE_URL.replace(/\/?$/, '/')}${path.replace(/^\//, '')}`
