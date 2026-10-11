@@ -1,9 +1,16 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link, NavLink } from 'react-router'
 import { navLinks } from '../data/site'
 import useLockBody from '../hooks/useLockBody'
+import { AppRoutes } from '../constants/global.constants'
 
-function BurgerButton({ open, onClick }) {
+interface BurgerButtonProps {
+  open: boolean
+  onClick: () => void
+}
+
+function BurgerButton({ open, onClick }: BurgerButtonProps) {
   return (
     <button
       type="button"
@@ -38,15 +45,16 @@ export default function Header() {
   return (
     <header className="relative z-50">
       <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-5 px-4 py-5 md:py-8">
-        <motion.a
-          href="#home"
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           className="shrink-0"
         >
-          <img src="/img/logo.svg" alt="Hire" className="h-10 w-auto md:h-12" />
-        </motion.a>
+          <Link to={AppRoutes.HOME_PAGE} aria-label="Hire — home page">
+            <img src="/img/logo.svg" alt="Hire" className="h-10 w-auto md:h-12" />
+          </Link>
+        </motion.div>
 
         {/* Desktop nav */}
         <motion.nav
@@ -56,14 +64,26 @@ export default function Header() {
           className="hidden items-center gap-8 lg:flex xl:gap-12"
         >
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="group relative py-1 text-base font-medium capitalize text-cream transition-colors hover:text-white"
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) =>
+                `group relative py-1 text-base font-medium capitalize transition-colors ${
+                  isActive ? 'text-white' : 'text-cream hover:text-white'
+                }`
+              }
             >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 h-[3px] w-full origin-left scale-x-0 bg-accent transition-transform duration-300 group-hover:scale-x-100" />
-            </a>
+              {({ isActive }) => (
+                <>
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-[3px] w-full origin-left bg-accent transition-transform duration-300 ${
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`}
+                  />
+                </>
+              )}
+            </NavLink>
           ))}
         </motion.nav>
 
@@ -111,17 +131,24 @@ export default function Header() {
               className="fixed inset-y-0 left-0 z-50 flex w-[82%] max-w-sm flex-col items-center justify-center gap-2 bg-accent px-8 lg:hidden"
             >
               {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
+                <motion.div
+                  key={link.to}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + i * 0.06, duration: 0.4 }}
-                  className="py-2 text-3xl font-medium capitalize text-white transition-opacity hover:opacity-80"
                 >
-                  {link.label}
-                </motion.a>
+                  <NavLink
+                    to={link.to}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `block py-2 text-3xl font-medium capitalize transition-opacity hover:opacity-80 ${
+                        isActive ? 'text-white underline decoration-2 underline-offset-8' : 'text-white/85'
+                      }`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                </motion.div>
               ))}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

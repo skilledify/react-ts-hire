@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import type { FilterOptionConfig } from '../data/site'
 
-export default function FilterSelect({ config, value, onChange }) {
+interface FilterSelectProps {
+  config: FilterOptionConfig
+  value: string
+  onChange: (value: string) => void
+}
+
+export default function FilterSelect({ config, value, onChange }: FilterSelectProps) {
   const [open, setOpen] = useState(false)
-  const rootRef = useRef(null)
+  const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!open) return
-    const onPointerDown = (e) => {
-      if (!rootRef.current?.contains(e.target)) setOpen(false)
+    const onPointerDown = (e: PointerEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
     }
     document.addEventListener('pointerdown', onPointerDown)
     return () => document.removeEventListener('pointerdown', onPointerDown)

@@ -1,14 +1,27 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { Link } from 'react-router'
 import { galleryColumns } from '../data/site'
 import Reveal from './Reveal'
+import { AppRoutes } from '../constants/global.constants'
 
-function CrossfadeSlider({ images, interval = 5000, className = '' }) {
-  const [[index, direction], setState] = useState([0, 1])
+interface CrossfadeSliderProps {
+  images: string[]
+  interval?: number
+  className?: string
+}
+
+function CrossfadeSlider({
+  images,
+  interval = 5000,
+  className = '',
+}: CrossfadeSliderProps) {
+  const [index, setIndex] = useState(0)
 
   useEffect(() => {
     const id = window.setInterval(
-      () => setState(([i, d]) => [(i + d + images.length) % images.length, d]),
+      () =>
+        setIndex((i) => (i + 1) % images.length),
       interval,
     )
     return () => window.clearInterval(id)
@@ -68,14 +81,18 @@ export default function Gallery() {
               morbi augue justo. Nibh laoreet volutpat quis velit. Blandit aliquam
               donec sed morbi congue eget lorem viverra porta id lobortis.
             </p>
-            <motion.a
-              href="#begin"
+            <motion.span
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="mt-11 inline-block bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+              className="mt-11 inline-block"
             >
-              Get in touch
-            </motion.a>
+              <Link
+                to={AppRoutes.CONTACT_PAGE}
+                className="bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+              >
+                Get in touch
+              </Link>
+            </motion.span>
           </Reveal>
         </div>
       </div>

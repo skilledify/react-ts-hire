@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router'
 import Reveal from './Reveal'
+import { AppRoutes } from '../constants/global.constants'
 
 const wavePaths = [
   { d: 'M-104 48C-3.02255 72.5207 219.946 210.45 304 566', opacity: 0.58 },
@@ -77,14 +79,18 @@ export default function Begin() {
             justo. Nibh laoreet volutpat quis velit. Blandit aliquam donec sed morbi
             congue eget lorem viverra porta id lobortis.
           </p>
-          <motion.a
-            href="#home"
+          <motion.span
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="mt-12 inline-block bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+            className="mt-12 inline-block"
           >
-            Get Started
-          </motion.a>
+            <Link
+              to={AppRoutes.CONTACT_PAGE}
+              className="bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+            >
+              Get Started
+            </Link>
+          </motion.span>
         </Reveal>
       </div>
     </section>

@@ -1,4 +1,6 @@
+import type { ComponentType } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router'
 import { footerColumns } from '../data/site'
 import {
   FacebookIcon,
@@ -7,8 +9,14 @@ import {
   YoutubeIcon,
 } from './icons'
 import Reveal from './Reveal'
+import { AppRoutes } from '../constants/global.constants'
 
-const socials = [
+interface Social {
+  Icon: ComponentType<{ className?: string }>
+  label: string
+}
+
+const socials: Social[] = [
   { Icon: FacebookIcon, label: 'Facebook' },
   { Icon: InstagramIcon, label: 'Instagram' },
   { Icon: TwitterIcon, label: 'Twitter' },
@@ -23,9 +31,9 @@ export default function Footer() {
       <div className="mx-auto px-4 max-w-[1450px]">
         <div className="gap-10 lg:gap-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 pb-14">
           <Reveal className="col-span-2 md:col-span-3 lg:col-span-1">
-            <a href="#home">
+            <Link to={AppRoutes.HOME_PAGE}>
               <img src="/img/logo.svg" alt="Hire" className="w-auto h-11" />
-            </a>
+            </Link>
             <p className="mt-[22px] max-w-[340px] text-mist text-lg leading-[1.7]">
               Neque, vestibulum sed varius magna et at. Eu, adipiscing morbi augue.
             </p>
@@ -52,13 +60,19 @@ export default function Footer() {
               </h3>
               <ul>
                 {column.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#footer"
-                      className="inline-block py-1 text-mist hover:text-white text-lg leading-[1.7] transition-all hover:translate-x-1 duration-200"
-                    >
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    {link.to ? (
+                      <Link
+                        to={link.to}
+                        className="inline-block py-1 text-mist hover:text-white text-lg leading-[1.7] transition-all hover:translate-x-1 duration-200"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <span className="inline-block py-1 text-mist text-lg leading-[1.7]">
+                        {link.label}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>

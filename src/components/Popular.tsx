@@ -1,12 +1,20 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router'
 import { properties } from '../data/site'
+import type { Property } from '../data/site'
 import { AreaIcon, BathIcon, BedIcon } from './icons'
 import Reveal from './Reveal'
+import { AppRoutes } from '../constants/global.constants'
 
 const cardWidth = 'w-[86vw] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]'
 
-function PropertyCard({ property, index }) {
+interface PropertyCardProps {
+  property: Property
+  index: number
+}
+
+function PropertyCard({ property, index }: PropertyCardProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
@@ -46,7 +54,12 @@ function PropertyCard({ property, index }) {
   )
 }
 
-function ArrowButton({ direction, onClick }) {
+interface ArrowButtonProps {
+  direction: 'prev' | 'next'
+  onClick: () => void
+}
+
+function ArrowButton({ direction, onClick }: ArrowButtonProps) {
   return (
     <motion.button
       type="button"
@@ -66,12 +79,12 @@ function ArrowButton({ direction, onClick }) {
 }
 
 export default function Popular() {
-  const trackRef = useRef(null)
+  const trackRef = useRef<HTMLDivElement>(null)
 
-  const scrollByCard = (dir) => {
+  const scrollByCard = (dir: number) => {
     const track = trackRef.current
     if (!track) return
-    const card = track.querySelector('article')
+    const card = track.querySelector<HTMLElement>('article')
     const amount = card ? card.offsetWidth + 20 : track.clientWidth * 0.8
     track.scrollBy({ left: dir * amount, behavior: 'smooth' })
   }
@@ -105,14 +118,18 @@ export default function Popular() {
         </div>
 
         <div className="mt-12 text-center">
-          <motion.a
-            href="#gallery"
+          <motion.span
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-block bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+            className="inline-block"
           >
-            View all properties
-          </motion.a>
+            <Link
+              to={AppRoutes.BUYING_PAGE}
+              className="inline-block bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+            >
+              View all properties
+            </Link>
+          </motion.span>
         </div>
       </div>
     </section>

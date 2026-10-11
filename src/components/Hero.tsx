@@ -4,8 +4,11 @@ import { filterConfig } from '../data/site'
 import FilterSelect from './FilterSelect'
 
 export default function Hero() {
-  const [values, setValues] = useState(() =>
-    Object.fromEntries(filterConfig.map((c) => [c.key, c.options[0]])),
+  const [values, setValues] = useState<Record<string, string>>(() =>
+    Object.fromEntries(filterConfig.map((c) => [c.key, c.options[0]])) as Record<
+      string,
+      string
+    >,
   )
   const [searching, setSearching] = useState(false)
 

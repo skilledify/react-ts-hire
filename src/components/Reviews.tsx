@@ -2,7 +2,12 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { reviews } from '../data/site'
 
-function ReviewArrow({ direction, onClick }) {
+interface ReviewArrowProps {
+  direction: 'prev' | 'next'
+  onClick: () => void
+}
+
+function ReviewArrow({ direction, onClick }: ReviewArrowProps) {
   const isPrev = direction === 'prev'
   return (
     <button
@@ -27,11 +32,11 @@ function ReviewArrow({ direction, onClick }) {
 }
 
 export default function Reviews() {
-  const [[index, direction], setState] = useState([0, 0])
+  const [[index, direction], setState] = useState<[number, number]>([0, 0])
   const current = reviews[index]
 
-  const paginate = (dir) =>
-    setState(([i]) => [(i + dir + reviews.length) % reviews.length, dir])
+  const paginate = (dir: number) =>
+    setState(([i]): [number, number] => [(i + dir + reviews.length) % reviews.length, dir])
 
   return (
     <section className="relative overflow-hidden pb-20 md:pb-40">
