@@ -18,23 +18,27 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative overflow-hidden pb-16 pt-6 md:pb-28">
-      {/* Decorative rotated squares */}
-      <motion.img
-        src="/img/hero-deco.svg"
-        alt=""
-        aria-hidden="true"
-        initial={{ opacity: 0, x: 80 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute -bottom-40 right-0 z-0 hidden h-[500px] select-none xl:block"
-      />
-      <motion.img
-        src="/img/hero-deco.svg"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 right-0 z-0 hidden h-72 select-none md:block xl:hidden"
-      />
+    <section id="home" className="relative pb-16 pt-6 md:pb-28">
+      {/* Decorative rotated squares — wrapped in their own clipping layer so the
+          hero-deco art is cut at the section edge WITHOUT clipping the open
+          FilterSelect dropdowns (which must overflow past the section bottom). */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.img
+          src="/img/hero-deco.svg"
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0, x: 80 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute -bottom-40 right-0 z-0 hidden h-[500px] select-none xl:block"
+        />
+        <motion.img
+          src="/img/hero-deco.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute -bottom-24 right-0 z-0 hidden h-72 select-none md:block xl:hidden"
+        />
+      </div>
 
       <div className="relative z-10 mx-auto grid max-w-[1450px] items-start gap-10 px-4 lg:grid-cols-2">
         <div className="w-full">

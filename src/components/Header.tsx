@@ -147,7 +147,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-y-0 left-0 z-50 flex w-[82%] max-w-sm flex-col items-center justify-center gap-2 bg-accent px-8 lg:hidden"
+              className="fixed inset-y-0 left-0 z-50 flex w-[82%] max-w-sm flex-col items-center justify-center gap-2 bg-accent px-6 sm:px-8 lg:hidden"
             >
               {navLinks.map((link, i) => (
                 <motion.div
@@ -160,7 +160,7 @@ export default function Header() {
                     to={link.to}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `block py-2 text-3xl font-medium capitalize transition-opacity hover:opacity-80 ${
+                      `block py-2 text-2xl font-medium capitalize transition-opacity hover:opacity-80 ${
                         isActive ? 'text-white underline decoration-2 underline-offset-8' : 'text-white/85'
                       }`
                     }
@@ -173,7 +173,7 @@ export default function Header() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.4 }}
-                className="mt-8 flex gap-3"
+                className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
               >
                 {user ? (
                   <button
@@ -182,7 +182,7 @@ export default function Header() {
                       logout()
                       setOpen(false)
                     }}
-                    className="cursor-pointer border-2 border-white px-6 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent"
+                    className="cursor-pointer whitespace-nowrap border-2 border-white px-4 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent sm:px-6"
                   >
                     Log out
                   </button>
@@ -191,14 +191,14 @@ export default function Header() {
                     <Link
                       to={AppRoutes.LOGIN_PAGE}
                       onClick={() => setOpen(false)}
-                      className="cursor-pointer border-2 border-white px-6 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent"
+                      className="cursor-pointer whitespace-nowrap border-2 border-white px-4 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent sm:px-6"
                     >
                       Login
                     </Link>
                     <Link
                       to={AppRoutes.SIGNUP_PAGE}
                       onClick={() => setOpen(false)}
-                      className="cursor-pointer border-2 border-white bg-white px-6 py-2 font-medium text-accent transition-colors hover:bg-transparent hover:text-white"
+                      className="cursor-pointer whitespace-nowrap border-2 border-white bg-white px-4 py-2 font-medium text-accent transition-colors hover:bg-transparent hover:text-white sm:px-6"
                     >
                       Sign Up
                     </Link>
