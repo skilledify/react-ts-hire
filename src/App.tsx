@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import MainLayout from './layouts/MainLayout'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
@@ -16,7 +16,8 @@ import { AppRoutes } from './constants/global.constants'
  */
 export default function App() {
   return (
-    <Routes>
+    <BrowserRouter basename="/react-ts-hire">
+        <Routes>
       <Route element={<MainLayout />}>
         <Route path={AppRoutes.HOME_PAGE} element={<HomePage />} />
         <Route path={AppRoutes.ABOUT_PAGE} element={<AboutPage />} />
@@ -27,5 +28,7 @@ export default function App() {
         <Route path={AppRoutes.NOTFOUND_PAGE} element={<NotFoundPage />} />
       </Route>
     </Routes>
+    </BrowserRouter>
+
   )
 }
