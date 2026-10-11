@@ -1,8 +1,4 @@
 import { useEffect } from 'react'
-
-/**
- * Locks body scrolling while `locked` is true (mobile menu, modals).
- */
 export default function useLockBody(locked: boolean): void {
   useEffect(() => {
     if (!locked) return

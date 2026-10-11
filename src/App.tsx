@@ -12,12 +12,6 @@ import NotFoundPage from './pages/NotFoundPage'
 import { AppRoutes } from './constants/global.constants'
 import { AuthProvider } from './context/AuthContext'
 
-/**
- * Декларативная конфигурация маршрутов React Router 7.
- * Все страницы обёрнуты в MainLayout через layout-route (path без element),
- * путь-константы берутся из global.constants.
- * AuthProvider обеспечивает фронтенд-аутентификацию (localStorage) для всего приложения.
- */
 export default function App() {
   return (
     <BrowserRouter basename="/react-ts-hire">
@@ -39,4 +33,3 @@ export default function App() {
     </BrowserRouter>
   )
 }
-

@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { FilterOptionConfig } from '../data/site'
-
 interface FilterSelectProps {
   config: FilterOptionConfig
   value: string
   onChange: (value: string) => void
 }
-
 export default function FilterSelect({ config, value, onChange }: FilterSelectProps) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     if (!open) return
     const onPointerDown = (e: PointerEvent) => {
@@ -20,17 +17,16 @@ export default function FilterSelect({ config, value, onChange }: FilterSelectPr
     document.addEventListener('pointerdown', onPointerDown)
     return () => document.removeEventListener('pointerdown', onPointerDown)
   }, [open])
-
   return (
-    <div ref={rootRef} className="relative px-5 py-4 md:px-8">
+    <div ref={rootRef} className="relative px-5 md:px-8 py-4">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full cursor-pointer flex-col items-start text-left"
+        className="flex flex-col items-start w-full text-left cursor-pointer"
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span className="flex items-center gap-1.5 text-base text-[#858585]">
+        <span className="flex items-center gap-1.5 text-[#858585] text-base">
           {config.label}
           <motion.svg
             width="10"
@@ -47,11 +43,10 @@ export default function FilterSelect({ config, value, onChange }: FilterSelectPr
             />
           </motion.svg>
         </span>
-        <span className="mt-1 max-w-full truncate text-lg font-semibold capitalize text-ink">
+        <span className="mt-1 max-w-full font-semibold text-ink text-lg truncate capitalize">
           {value}
         </span>
       </button>
-
       <AnimatePresence>
         {open && (
           <motion.ul
@@ -60,7 +55,7 @@ export default function FilterSelect({ config, value, onChange }: FilterSelectPr
             animate={{ opacity: 1, y: 6, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="absolute inset-x-0 top-full z-30 overflow-hidden rounded-md bg-white shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+            className="top-full z-30 absolute inset-x-0 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] rounded-md overflow-hidden"
           >
             {config.options.map((option, i) => (
               <motion.li

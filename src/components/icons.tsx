@@ -1,7 +1,3 @@
-// Auto-generated from legacy/index.html by scripts/extract-icons.mjs
-// Feature icons (bed / bath / area) and social icons, colored via currentColor.
-
-
 export function BedIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 22 22" fill="none" className={className} aria-hidden="true">
@@ -9,7 +5,6 @@ export function BedIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function BathIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 22 22" fill="none" className={className} aria-hidden="true">
@@ -17,7 +12,6 @@ export function BathIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function AreaIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 22 22" fill="none" className={className} aria-hidden="true">
@@ -25,8 +19,6 @@ export function AreaIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
-
 export function FacebookIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="" fill="none" className={className} aria-hidden="true">
@@ -34,7 +26,6 @@ export function FacebookIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function InstagramIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="" fill="none" className={className} aria-hidden="true">
@@ -44,7 +35,6 @@ export function InstagramIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function TwitterIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="" fill="none" className={className} aria-hidden="true">
@@ -52,7 +42,6 @@ export function TwitterIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function YoutubeIcon({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="" fill="none" className={className} aria-hidden="true">
@@ -60,7 +49,6 @@ export function YoutubeIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function EyeIcon({ className = '' }: { className?: string }) {
   return (
     <svg
@@ -78,7 +66,6 @@ export function EyeIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-
 export function EyeOffIcon({ className = '' }: { className?: string }) {
   return (
     <svg
@@ -98,4 +85,3 @@ export function EyeOffIcon({ className = '' }: { className?: string }) {
     </svg>
   )
 }
-

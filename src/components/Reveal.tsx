@@ -1,17 +1,11 @@
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
-
 interface RevealProps {
   children: ReactNode
   delay?: number
   y?: number
   className?: string
 }
-
-/**
- * Scroll-into-view reveal wrapper.
- * Fades children up when they enter the viewport (once).
- */
 export default function Reveal({
   children,
   delay = 0,

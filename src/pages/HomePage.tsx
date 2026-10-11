@@ -5,8 +5,6 @@ import Why from '../components/Why'
 import Reviews from '../components/Reviews'
 import Gallery from '../components/Gallery'
 import Begin from '../components/Begin'
-
-/** Главная страница: композиция секций лендинга. */
 export default function HomePage() {
   return (
     <>

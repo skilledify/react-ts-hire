@@ -9,16 +9,13 @@ import AnimatedNumber from '../components/AnimatedNumber'
 import { rentals, rentingFaqs, rentalTypes } from '../data/site'
 import type { Rental, RentalType } from '../data/site'
 import { AppRoutes } from '../constants/global.constants'
-
 const priceFormat = (value: number) =>
   value.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
   })
-
 const MAX_PRICE = 4500
-
 const included = [
   'Verified landlord and legal documents',
   'Viewings 7 days a week, evenings included',
@@ -26,16 +23,12 @@ const included = [
   'Deposit protection',
   'Maintenance request tracking',
 ]
-
-/* ---------------------------------- Секции ---------------------------------- */
-
 interface Filters {
   type: RentalType | 'all'
   beds: number | 'all'
   maxPrice: number
   query: string
 }
-
 function ListingsSection() {
   const [filters, setFilters] = useState<Filters>({
     type: 'all',
@@ -43,7 +36,6 @@ function ListingsSection() {
     maxPrice: MAX_PRICE,
     query: '',
   })
-
   const filtered = useMemo(
     () =>
       rentals.filter((rental) => {
@@ -61,23 +53,20 @@ function ListingsSection() {
       }),
     [filters],
   )
-
   const selectClass =
     'w-full border border-line bg-ink px-4 py-3 text-lg text-cream outline-none transition-colors focus:border-accent [&>option]:bg-ink'
-
   return (
     <section className="bg-ink-soft py-16 md:py-28">
-      <div className="mx-auto max-w-[1450px] px-4">
+      <div className="mx-auto px-4 max-w-[1450px]">
         <Reveal>
-          <h2 className="text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] font-semibold capitalize">
+          <h2 className="font-semibold text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] capitalize">
             Available to rent now
           </h2>
         </Reveal>
-
-        {/* Фильтры */}
-        <div className="mt-10 grid gap-4 border border-line bg-ink p-6 md:grid-cols-4">
+        {}
+        <div className="gap-4 grid md:grid-cols-4 bg-ink mt-10 p-6 border border-line">
           <label className="flex flex-col gap-2">
-            <span className="text-base text-mist">Search</span>
+            <span className="text-mist text-base">Search</span>
             <input
               type="search"
               value={filters.query}
@@ -87,7 +76,7 @@ function ListingsSection() {
             />
           </label>
           <label className="flex flex-col gap-2">
-            <span className="text-base text-mist">Property type</span>
+            <span className="text-mist text-base">Property type</span>
             <select
               value={filters.type}
               onChange={(e) =>
@@ -104,7 +93,7 @@ function ListingsSection() {
             </select>
           </label>
           <label className="flex flex-col gap-2">
-            <span className="text-base text-mist">Minimum bedrooms</span>
+            <span className="text-mist text-base">Minimum bedrooms</span>
             <select
               value={filters.beds}
               onChange={(e) =>
@@ -123,7 +112,7 @@ function ListingsSection() {
             </select>
           </label>
           <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between text-base">
+            <div className="flex justify-between items-center text-base">
               <span className="text-mist">Max budget</span>
               <span className="font-semibold text-cream">
                 {priceFormat(filters.maxPrice)} / mo
@@ -141,15 +130,14 @@ function ListingsSection() {
               aria-label="Maximum monthly budget"
               className="mt-3 w-full accent-accent"
             />
-            <span className="text-base text-mist">
+            <span className="text-mist text-base">
               {filtered.length} of {rentals.length} matches
             </span>
           </div>
         </div>
-
-        {/* Результаты */}
+        {}
         {filtered.length > 0 ? (
-          <motion.div layout className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <motion.div layout className="gap-8 grid sm:grid-cols-2 lg:grid-cols-3 mt-10">
             {filtered.map((rental: Rental, i: number) => (
               <motion.article
                 layout
@@ -157,36 +145,36 @@ function ListingsSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-                className="group flex flex-col border border-line bg-ink transition-colors duration-300 hover:border-accent"
+                className="group flex flex-col bg-ink border border-line hover:border-accent transition-colors duration-300"
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={rental.image}
                     alt={rental.title}
-                    className="h-[240px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-[240px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <span className="absolute left-0 top-0 bg-accent px-4 py-2 text-base font-medium text-white">
+                  <span className="top-0 left-0 absolute bg-accent px-4 py-2 font-medium text-white text-base">
                     {rental.type}
                   </span>
                 </div>
-                <div className="flex flex-1 flex-col p-7">
-                  <h3 className="text-2xl font-semibold capitalize transition-colors duration-300 group-hover:text-accent">
+                <div className="flex flex-col flex-1 p-7">
+                  <h3 className="font-semibold group-hover:text-accent text-2xl capitalize transition-colors duration-300">
                     {rental.title}
                   </h3>
-                  <p className="mt-2 text-lg text-mist">{rental.address}</p>
-                  <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-base text-mist">
+                  <p className="mt-2 text-mist text-lg">{rental.address}</p>
+                  <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 text-mist text-base">
                     <span>{rental.beds} beds</span>
                     <span>{rental.baths} baths</span>
                     <span>{rental.area} sqft</span>
                   </div>
-                  <div className="mt-6 flex items-center justify-between">
-                    <span className="text-2xl font-semibold text-accent">
+                  <div className="flex justify-between items-center mt-6">
+                    <span className="font-semibold text-accent text-2xl">
                       {priceFormat(rental.price)}
-                      <span className="text-base text-mist"> / mo</span>
+                      <span className="text-mist text-base"> / mo</span>
                     </span>
                     <Link
                       to={AppRoutes.CONTACT_PAGE}
-                      className="border border-line px-5 py-2.5 text-base text-cream transition-colors duration-200 hover:border-accent hover:text-accent"
+                      className="px-5 py-2.5 border border-line hover:border-accent text-cream hover:text-accent text-base transition-colors duration-200"
                     >
                       Book a viewing
                     </Link>
@@ -199,15 +187,15 @@ function ListingsSection() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mt-10 border border-line bg-ink p-12 text-center"
+            className="bg-ink mt-10 p-12 border border-line text-center"
           >
             <p className="text-xl">No homes match these filters yet.</p>
-            <p className="mt-3 text-lg text-mist">
+            <p className="mt-3 text-mist text-lg">
               Send us your criteria — we search our off-market database too.
             </p>
             <Link
               to={AppRoutes.CONTACT_PAGE}
-              className="mt-6 inline-block bg-accent px-8 py-4 text-lg font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark"
+              className="inline-block bg-accent mt-6 px-8 py-4 font-medium text-white text-lg capitalize transition-colors duration-200 hover:bg-accent-dark"
             >
               Set up a search
             </Link>
@@ -217,23 +205,22 @@ function ListingsSection() {
     </section>
   )
 }
-
 function IncludedSection() {
   return (
     <section className="py-16 md:py-28">
-      <div className="mx-auto grid max-w-[1450px] items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16">
+      <div className="items-center gap-12 lg:gap-16 grid lg:grid-cols-2 mx-auto px-4 max-w-[1450px]">
         <div>
           <Reveal>
-            <span className="text-lg text-accent">Tenant service</span>
-            <h2 className="mt-2 text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] font-semibold capitalize leading-[1.26]">
+            <span className="text-accent text-lg">Tenant service</span>
+            <h2 className="mt-2 font-semibold text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] capitalize leading-[1.26]">
               Everything included in our rental service
             </h2>
-            <p className="mt-6 text-lg leading-[1.7] text-mist">
+            <p className="mt-6 text-mist text-lg leading-[1.7]">
               We sign the lease, protect your deposit and stay your contact after
               move-in. One manager handles the whole tenancy.
             </p>
           </Reveal>
-          <ul className="mt-8 grid gap-4">
+          <ul className="gap-4 grid mt-8">
             {included.map((item, i) => (
               <motion.li
                 key={item}
@@ -243,7 +230,7 @@ function IncludedSection() {
                 transition={{ duration: 0.5, delay: i * 0.07 }}
                 className="flex items-center gap-4 text-lg leading-[1.7]"
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+                <span className="flex justify-center items-center bg-accent rounded-full w-8 h-8 text-white shrink-0">
                   ✓
                 </span>
                 {item}
@@ -252,30 +239,30 @@ function IncludedSection() {
           </ul>
         </div>
         <Reveal>
-          <div className="grid grid-cols-2 gap-6">
-            <div className="border border-line bg-ink-soft p-7">
-              <div className="text-[clamp(2rem,1.5rem+2.2vw,3rem)] font-semibold leading-none text-accent">
+          <div className="gap-6 grid grid-cols-2">
+            <div className="bg-ink-soft p-7 border border-line">
+              <div className="font-semibold text-[clamp(2rem,1.5rem+2.2vw,3rem)] text-accent leading-none">
                 <AnimatedNumber value={48} suffix="h" />
               </div>
-              <p className="mt-3 text-lg text-mist">Average application review</p>
+              <p className="mt-3 text-mist text-lg">Average application review</p>
             </div>
-            <div className="border border-line bg-ink-soft p-7">
-              <div className="text-[clamp(2rem,1.5rem+2.2vw,3rem)] font-semibold leading-none text-accent">
+            <div className="bg-ink-soft p-7 border border-line">
+              <div className="font-semibold text-[clamp(2rem,1.5rem+2.2vw,3rem)] text-accent leading-none">
                 <AnimatedNumber value={100} suffix="%" />
               </div>
-              <p className="mt-3 text-lg text-mist">Landlords legally verified</p>
+              <p className="mt-3 text-mist text-lg">Landlords legally verified</p>
             </div>
-            <div className="border border-line bg-ink-soft p-7">
-              <div className="text-[clamp(2rem,1.5rem+2.2vw,3rem)] font-semibold leading-none text-accent">
+            <div className="bg-ink-soft p-7 border border-line">
+              <div className="font-semibold text-[clamp(2rem,1.5rem+2.2vw,3rem)] text-accent leading-none">
                 <AnimatedNumber value={7} />
               </div>
-              <p className="mt-3 text-lg text-mist">Viewing days per week</p>
+              <p className="mt-3 text-mist text-lg">Viewing days per week</p>
             </div>
-            <div className="border border-line bg-ink-soft p-7">
-              <div className="text-[clamp(2rem,1.5rem+2.2vw,3rem)] font-semibold leading-none text-accent">
+            <div className="bg-ink-soft p-7 border border-line">
+              <div className="font-semibold text-[clamp(2rem,1.5rem+2.2vw,3rem)] text-accent leading-none">
                 <AnimatedNumber value={0} prefix="$" />
               </div>
-              <p className="mt-3 text-lg text-mist">Tenant agency fee</p>
+              <p className="mt-3 text-mist text-lg">Tenant agency fee</p>
             </div>
           </div>
         </Reveal>
@@ -283,17 +270,16 @@ function IncludedSection() {
     </section>
   )
 }
-
 function CompareSection() {
   return (
     <section className="bg-ink-soft py-16 md:py-28">
-      <div className="mx-auto max-w-[1450px] px-4">
+      <div className="mx-auto px-4 max-w-[1450px]">
         <Reveal>
-          <span className="text-lg text-accent">Rent or buy?</span>
-          <h2 className="mt-2 text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] font-semibold capitalize">
+          <span className="text-accent text-lg">Rent or buy?</span>
+          <h2 className="mt-2 font-semibold text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] capitalize">
             Rent vs buy calculator
           </h2>
-          <p className="mt-4 max-w-[680px] text-lg leading-[1.7] text-mist">
+          <p className="mt-4 max-w-[680px] text-mist text-lg leading-[1.7]">
             See which option really costs less over your time horizon — with rent
             growth, maintenance, closing costs and home appreciation included.
           </p>
@@ -305,13 +291,12 @@ function CompareSection() {
     </section>
   )
 }
-
 function RentingFaqSection() {
   return (
     <section className="py-16 md:py-28">
-      <div className="mx-auto max-w-[1450px] px-4">
+      <div className="mx-auto px-4 max-w-[1450px]">
         <Reveal>
-          <h2 className="text-center text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] font-semibold capitalize">
+          <h2 className="font-semibold text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] text-center capitalize">
             Renting questions
           </h2>
         </Reveal>
@@ -322,9 +307,6 @@ function RentingFaqSection() {
     </section>
   )
 }
-
-/* ---------------------------------- Страница ---------------------------------- */
-
 export default function RentingPage() {
   return (
     <>
@@ -340,7 +322,7 @@ export default function RentingPage() {
         >
           <Link
             to={AppRoutes.CONTACT_PAGE}
-            className="inline-block bg-accent px-8 py-4 text-lg font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark"
+            className="inline-block bg-accent px-8 py-4 font-medium text-white text-lg capitalize transition-colors duration-200 hover:bg-accent-dark"
           >
             Tell us what you need
           </Link>

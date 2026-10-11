@@ -5,12 +5,10 @@ import { navLinks } from '../data/site'
 import useLockBody from '../hooks/useLockBody'
 import { AppRoutes, asset } from '../constants/global.constants'
 import { useAuth } from '../context/AuthContext'
-
 interface BurgerButtonProps {
   open: boolean
   onClick: () => void
 }
-
 function BurgerButton({ open, onClick }: BurgerButtonProps) {
   return (
     <button
@@ -18,35 +16,33 @@ function BurgerButton({ open, onClick }: BurgerButtonProps) {
       onClick={onClick}
       aria-label={open ? 'Close menu' : 'Open menu'}
       aria-expanded={open}
-      className="relative z-[60] flex h-10 w-10 shrink-0 cursor-pointer flex-col items-center justify-center gap-[7px] rounded-full border border-accent/40 transition-colors hover:border-accent lg:hidden"
+      className="lg:hidden z-[60] relative flex flex-col justify-center items-center gap-[7px] border border-accent/40 hover:border-accent rounded-full w-10 h-10 transition-colors cursor-pointer shrink-0"
     >
       <motion.span
         animate={open ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
-        className="block h-[2px] w-5 bg-cream"
+        className="block bg-cream w-5 h-[2px]"
         transition={{ duration: 0.3 }}
       />
       <motion.span
         animate={open ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-        className="block h-[2px] w-5 bg-cream"
+        className="block bg-cream w-5 h-[2px]"
         transition={{ duration: 0.2 }}
       />
       <motion.span
         animate={open ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
-        className="block h-[2px] w-5 bg-cream"
+        className="block bg-cream w-5 h-[2px]"
         transition={{ duration: 0.3 }}
       />
     </button>
   )
 }
-
 export default function Header() {
   const [open, setOpen] = useState(false)
   const { user, logout } = useAuth()
   useLockBody(open)
-
   return (
-    <header className="relative z-50">
-      <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-2 px-4 py-5 sm:gap-5 md:py-8">
+    <header className="z-50 relative">
+      <div className="flex justify-between items-center gap-2 sm:gap-5 mx-auto px-4 py-5 md:py-8 max-w-[1450px]">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -54,16 +50,15 @@ export default function Header() {
           className="shrink-0"
         >
           <Link to={AppRoutes.HOME_PAGE} aria-label="Hire — home page">
-            <img src={asset('/img/logo.svg')} alt="Hire" className="h-9 w-auto md:h-12" />
+            <img src={asset('/img/logo.svg')} alt="Hire" className="w-auto h-9 md:h-12" />
           </Link>
         </motion.div>
-
-        {/* Desktop nav */}
+        {}
         <motion.nav
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="hidden items-center gap-8 lg:flex xl:gap-12"
+          className="hidden lg:flex items-center gap-8 xl:gap-12"
         >
           {navLinks.map((link) => (
             <NavLink
@@ -88,22 +83,21 @@ export default function Header() {
             </NavLink>
           ))}
         </motion.nav>
-
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex shrink-0 items-center gap-1.5 sm:gap-2"
+          className="flex items-center gap-1.5 sm:gap-2 shrink-0"
         >
           {user ? (
             <>
-              <span className="hidden text-base text-mist md:inline">
+              <span className="hidden md:inline text-mist text-base">
                 Hi, {user.name}
               </span>
               <button
                 type="button"
                 onClick={logout}
-                className="cursor-pointer whitespace-nowrap border-2 border-accent px-2.5 py-[9px] text-sm font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white sm:px-5 sm:py-[10px] sm:text-base"
+                className="hover:bg-accent px-2.5 sm:px-5 py-[9px] sm:py-[10px] border-2 border-accent font-medium text-cream hover:text-white text-sm sm:text-base whitespace-nowrap transition-colors duration-200 cursor-pointer"
               >
                 Log out
               </button>
@@ -112,24 +106,22 @@ export default function Header() {
             <>
               <Link
                 to={AppRoutes.LOGIN_PAGE}
-                className="cursor-pointer whitespace-nowrap border-2 border-accent px-2.5 py-[9px] text-sm font-medium text-cream transition-colors duration-200 hover:bg-accent hover:text-white sm:px-5 sm:py-[10px] sm:text-base"
+                className="hover:bg-accent px-2.5 sm:px-5 py-[9px] sm:py-[10px] border-2 border-accent font-medium text-cream hover:text-white text-sm sm:text-base whitespace-nowrap transition-colors duration-200 cursor-pointer"
               >
                 Login
               </Link>
               <Link
                 to={AppRoutes.SIGNUP_PAGE}
-                className="cursor-pointer whitespace-nowrap border-2 border-accent bg-accent px-2.5 py-[9px] text-sm font-medium text-white transition-colors duration-200 hover:bg-transparent hover:text-cream sm:px-5 sm:py-[10px] sm:text-base"
+                className="bg-accent hover:bg-transparent px-2.5 sm:px-5 py-[9px] sm:py-[10px] border-2 border-accent font-medium text-white hover:text-cream text-sm sm:text-base whitespace-nowrap transition-colors duration-200 cursor-pointer"
               >
                 Sign Up
               </Link>
             </>
           )}
         </motion.div>
-
         <BurgerButton open={open} onClick={() => setOpen((v) => !v)} />
       </div>
-
-      {/* Mobile menu */}
+      {}
       <AnimatePresence>
         {open && (
           <>
@@ -139,7 +131,7 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-40 bg-ink/70 backdrop-blur-sm lg:hidden"
+              className="lg:hidden z-40 fixed inset-0 bg-ink/70 backdrop-blur-sm"
             />
             <motion.nav
               key="panel"
@@ -147,7 +139,7 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-y-0 left-0 z-50 flex w-[82%] max-w-sm flex-col items-center justify-center gap-2 bg-accent px-6 sm:px-8 lg:hidden"
+              className="lg:hidden left-0 z-50 fixed inset-y-0 flex flex-col justify-center items-center gap-2 bg-accent px-6 sm:px-8 w-[82%] max-w-sm"
             >
               {navLinks.map((link, i) => (
                 <motion.div
@@ -173,7 +165,7 @@ export default function Header() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.4 }}
-                className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+                className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mt-8"
               >
                 {user ? (
                   <button
@@ -182,7 +174,7 @@ export default function Header() {
                       logout()
                       setOpen(false)
                     }}
-                    className="cursor-pointer whitespace-nowrap border-2 border-white px-4 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent sm:px-6"
+                    className="hover:bg-white px-4 sm:px-6 py-2 border-2 border-white font-medium text-white hover:text-accent whitespace-nowrap transition-colors cursor-pointer"
                   >
                     Log out
                   </button>
@@ -191,14 +183,14 @@ export default function Header() {
                     <Link
                       to={AppRoutes.LOGIN_PAGE}
                       onClick={() => setOpen(false)}
-                      className="cursor-pointer whitespace-nowrap border-2 border-white px-4 py-2 font-medium text-white transition-colors hover:bg-white hover:text-accent sm:px-6"
+                      className="hover:bg-white px-4 sm:px-6 py-2 border-2 border-white font-medium text-white hover:text-accent whitespace-nowrap transition-colors cursor-pointer"
                     >
                       Login
                     </Link>
                     <Link
                       to={AppRoutes.SIGNUP_PAGE}
                       onClick={() => setOpen(false)}
-                      className="cursor-pointer whitespace-nowrap border-2 border-white bg-white px-4 py-2 font-medium text-accent transition-colors hover:bg-transparent hover:text-white sm:px-6"
+                      className="bg-white hover:bg-transparent px-4 sm:px-6 py-2 border-2 border-white font-medium text-accent hover:text-white whitespace-nowrap transition-colors cursor-pointer"
                     >
                       Sign Up
                     </Link>

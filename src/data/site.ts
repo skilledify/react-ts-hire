@@ -1,12 +1,8 @@
 import { AppRoutes, asset } from '../constants/global.constants'
-
-/* ---------------------------------- Хедер / футер ---------------------------------- */
-
 export interface NavItem {
   label: string
   to: string
 }
-
 export const navLinks: NavItem[] = [
   { label: 'home', to: AppRoutes.HOME_PAGE },
   { label: 'About us', to: AppRoutes.ABOUT_PAGE },
@@ -15,18 +11,14 @@ export const navLinks: NavItem[] = [
   { label: 'Selling', to: AppRoutes.SELLING_PAGE },
   { label: 'Contact us', to: AppRoutes.CONTACT_PAGE },
 ]
-
 export interface FooterLink {
   label: string
-  /** Внутренний маршрут React Router; если не задан — текст без ссылки */
   to?: string
 }
-
 export interface FooterColumn {
   title: string
   links: FooterLink[]
 }
-
 export const footerColumns: FooterColumn[] = [
   {
     title: 'Project',
@@ -62,15 +54,11 @@ export const footerColumns: FooterColumn[] = [
     ],
   },
 ]
-
-/* ---------------------------------- Главная страница ---------------------------------- */
-
 export interface FilterOptionConfig {
   key: string
   label: string
   options: string[]
 }
-
 export const filterConfig: FilterOptionConfig[] = [
   {
     key: 'purpose',
@@ -88,7 +76,6 @@ export const filterConfig: FilterOptionConfig[] = [
     options: ['Industrial home', 'Сарай', 'Подвал'],
   },
 ]
-
 export const logos: string[] = [
   asset('/img/logos/1.svg'),
   asset('/img/logos/2.svg'),
@@ -96,7 +83,6 @@ export const logos: string[] = [
   asset('/img/logos/4.svg'),
   asset('/img/logos/5.svg'),
 ]
-
 export interface Property {
   id: number
   title: string
@@ -106,7 +92,6 @@ export interface Property {
   baths: number
   area: number
 }
-
 export const properties: Property[] = [
   {
     id: 1,
@@ -163,14 +148,12 @@ export const properties: Property[] = [
     area: 980,
   },
 ]
-
 export interface Review {
   id: number
   text: string
   name: string
   job: string
 }
-
 export const reviews: Review[] = [
   {
     id: 1,
@@ -191,7 +174,6 @@ export const reviews: Review[] = [
     job: 'Agent, Nestwell',
   },
 ]
-
 export const galleryColumns: string[][] = [
   [
     asset('/img/gallery/1.jpg'),
@@ -209,11 +191,7 @@ export const galleryColumns: string[][] = [
     asset('/img/gallery/11.jpg'),
   ],
 ]
-
-/* ---------------------------------- Аренда (Renting) ---------------------------------- */
-
 export type RentalType = 'Apartment' | 'House' | 'Townhouse' | 'Studio'
-
 export interface Rental {
   id: number
   title: string
@@ -222,13 +200,10 @@ export interface Rental {
   beds: number
   baths: number
   area: number
-  /** Аренда в месяц, USD */
   price: number
   type: RentalType
 }
-
 export const rentalTypes: RentalType[] = ['Apartment', 'House', 'Townhouse', 'Studio']
-
 export const rentals: Rental[] = [
   {
     id: 1,
@@ -319,28 +294,22 @@ export const rentals: Rental[] = [
     type: 'Apartment',
   },
 ]
-
-/* ---------------------------------- About ---------------------------------- */
-
 export interface Stat {
   value: number
   suffix: string
   label: string
 }
-
 export const stats: Stat[] = [
   { value: 12, suffix: '+', label: 'Years on the market' },
   { value: 4800, suffix: '+', label: 'Happy families' },
   { value: 1350, suffix: '+', label: 'Homes closed' },
   { value: 98, suffix: '%', label: 'Satisfaction rate' },
 ]
-
 export interface TimelineItem {
   year: string
   title: string
   text: string
 }
-
 export const timeline: TimelineItem[] = [
   {
     year: '2014',
@@ -368,25 +337,21 @@ export const timeline: TimelineItem[] = [
     text: 'Buying, renting and selling — with one dedicated manager per client from start to keys.',
   },
 ]
-
 export interface TeamMember {
   name: string
   role: string
   initials: string
 }
-
 export const team: TeamMember[] = [
   { name: 'Amelia Hart', role: 'Founder & CEO', initials: 'AH' },
   { name: 'Daniel Okoye', role: 'Head of Sales', initials: 'DO' },
   { name: 'Sofia Marchetti', role: 'Rental Director', initials: 'SM' },
   { name: 'Liam Novak', role: 'Lead Advisor', initials: 'LN' },
 ]
-
 export interface ValueItem {
   title: string
   text: string
 }
-
 export const values: ValueItem[] = [
   {
     title: 'Transparency',
@@ -405,14 +370,10 @@ export const values: ValueItem[] = [
     text: 'Agents who actually live in the neighbourhoods they sell, with fresh data on every street.',
   },
 ]
-
-/* ---------------------------------- Buying ---------------------------------- */
-
 export interface Step {
   title: string
   text: string
 }
-
 export const buyingSteps: Step[] = [
   {
     title: 'Share your wish list',
@@ -435,12 +396,10 @@ export const buyingSteps: Step[] = [
     text: 'Review the closing statement, sign remotely or in person, collect the keys — and keep a 12-month support line.',
   },
 ]
-
 export interface Faq {
   question: string
   answer: string
 }
-
 export const buyingFaqs: Faq[] = [
   {
     question: 'How much deposit do I need?',
@@ -468,9 +427,6 @@ export const buyingFaqs: Faq[] = [
       'We compare offers from 12+ lenders and negotiate the terms on your behalf — completely free if you finance through one of our partners.',
   },
 ]
-
-/* ---------------------------------- Selling ---------------------------------- */
-
 export const sellingSteps: Step[] = [
   {
     title: 'Free valuation',
@@ -493,7 +449,6 @@ export const sellingSteps: Step[] = [
     text: 'We handle legal paperwork, redemption statements and the final walk-through until the money lands.',
   },
 ]
-
 export interface SellingPlan {
   name: string
   price: string
@@ -501,7 +456,6 @@ export interface SellingPlan {
   features: string[]
   featured: boolean
 }
-
 export const sellingPlans: SellingPlan[] = [
   {
     name: 'Basic',
@@ -537,7 +491,6 @@ export const sellingPlans: SellingPlan[] = [
     featured: false,
   },
 ]
-
 export const sellingFaqs: Faq[] = [
   {
     question: 'What does it cost to list with Hire?',
@@ -560,7 +513,6 @@ export const sellingFaqs: Faq[] = [
       'Yes. We synchronise both chains, negotiate rent-back when needed and aim for a single moving day with zero double-mortgage overlap.',
   },
 ]
-
 export const rentingFaqs: Faq[] = [
   {
     question: 'What documents do I need?',
@@ -583,7 +535,6 @@ export const rentingFaqs: Faq[] = [
       'Applications are reviewed within 24–48 hours, and most of our listings hand over keys the same week you apply.',
   },
 ]
-
 export const contactFaqs: Faq[] = [
   {
     question: 'Is the first consultation free?',
@@ -606,7 +557,3 @@ export const contactFaqs: Faq[] = [
       'Within one business day for every enquiry, and the same day for anything marked urgent, such as an offer deadline.',
   },
 ]
-
-
-
-

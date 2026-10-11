@@ -2,19 +2,17 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router'
 import Reveal from './Reveal'
 import { AppRoutes } from '../constants/global.constants'
-
 const wavePaths = [
   { d: 'M-104 48C-3.02255 72.5207 219.946 210.45 304 566', opacity: 0.58 },
   { d: 'M-58 2C42.9774 26.5207 265.946 164.45 350 520', opacity: 0.47 },
   { d: 'M-148 98C-47.0226 122.521 189.5 282 251.5 616', opacity: 0.9 },
 ]
-
 export default function Begin() {
   return (
-    <section id="begin" className="relative overflow-hidden py-20 md:py-40">
-      {/* Animated wave lines */}
+    <section id="begin" className="relative py-20 md:py-40 overflow-hidden">
+      {}
       <svg
-        className="pointer-events-none absolute -bottom-64 left-0 z-0 hidden h-[620px] select-none md:block"
+        className="hidden md:block -bottom-64 left-0 z-0 absolute h-[620px] pointer-events-none select-none"
         width="352"
         height="617"
         viewBox="0 0 352 617"
@@ -35,10 +33,9 @@ export default function Begin() {
           />
         ))}
       </svg>
-
-      {/* Animated stepped rectangles */}
+      {}
       <svg
-        className="pointer-events-none absolute -top-10 right-0 z-0 hidden select-none md:block"
+        className="hidden md:block -top-10 right-0 z-0 absolute pointer-events-none select-none"
         width="75"
         height="182"
         viewBox="0 0 75 182"
@@ -66,15 +63,14 @@ export default function Begin() {
           />
         ))}
       </svg>
-
-      <div className="relative z-10 mx-auto flex max-w-[1240px] flex-col items-center justify-between gap-10 px-4 text-center md:flex-row md:text-left">
+      <div className="z-10 relative flex md:flex-row flex-col justify-between items-center gap-10 mx-auto px-4 max-w-[1240px] md:text-left text-center">
         <Reveal className="md:flex-1">
-          <h2 className="text-[clamp(1.875rem,1.18rem+3.45vw,4.25rem)] font-semibold capitalize leading-[1.26]">
+          <h2 className="font-semibold text-[clamp(1.875rem,1.18rem+3.45vw,4.25rem)] capitalize leading-[1.26]">
             Let’s simply begin with hire.
           </h2>
         </Reveal>
         <Reveal delay={0.15} className="md:flex-1">
-          <p className="text-lg leading-[1.7] text-mist">
+          <p className="text-mist text-lg leading-[1.7]">
             Neque, vestibulum sed varius magna et at. Eu, adipiscing morbi augue
             justo. Nibh laoreet volutpat quis velit. Blandit aliquam donec sed morbi
             congue eget lorem viverra porta id lobortis.
@@ -82,11 +78,11 @@ export default function Begin() {
           <motion.span
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="mt-12 inline-block"
+            className="inline-block mt-12"
           >
             <Link
               to={AppRoutes.CONTACT_PAGE}
-              className="bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+              className="bg-accent px-10 md:px-[42px] py-5 md:py-[22px] font-medium text-white text-xl md:text-2xl capitalize transition-colors duration-200 hover:bg-accent-dark"
             >
               Get Started
             </Link>

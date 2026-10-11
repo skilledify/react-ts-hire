@@ -1,22 +1,16 @@
 import { useMemo, useState } from 'react'
 import AnimatedNumber from './AnimatedNumber'
-
 const currency = (value: number) =>
   value.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
   })
-
-/**
- * Interactive mortgage calculator: monthly payment, total interest, totals.
- */
 export default function MortgageCalculator() {
   const [price, setPrice] = useState(350000)
   const [downPct, setDownPct] = useState(20)
   const [years, setYears] = useState(20)
   const [rate, setRate] = useState(6.5)
-
   const { down, loan, monthly, totalInterest, totalPaid } = useMemo(() => {
     const downPayment = (price * downPct) / 100
     const loanAmount = Math.max(price - downPayment, 0)
@@ -35,13 +29,12 @@ export default function MortgageCalculator() {
       totalPaid: total + downPayment,
     }
   }, [price, downPct, years, rate])
-
   return (
-    <div className="grid items-start gap-8 border border-line bg-ink p-6 md:grid-cols-2 md:p-10 lg:gap-12">
-      {/* Controls */}
+    <div className="items-start gap-8 lg:gap-12 grid md:grid-cols-2 bg-ink p-6 md:p-10 border border-line">
+      {}
       <div className="flex flex-col gap-7">
         <div>
-          <div className="flex items-center justify-between text-base">
+          <div className="flex justify-between items-center text-base">
             <span className="text-mist">Home price</span>
             <span className="font-semibold text-cream">{currency(price)}</span>
           </div>
@@ -57,7 +50,7 @@ export default function MortgageCalculator() {
           />
         </div>
         <div>
-          <div className="flex items-center justify-between text-base">
+          <div className="flex justify-between items-center text-base">
             <span className="text-mist">Down payment</span>
             <span className="font-semibold text-cream">
               {downPct}% · {currency(down)}
@@ -75,7 +68,7 @@ export default function MortgageCalculator() {
           />
         </div>
         <div>
-          <div className="flex items-center justify-between text-base">
+          <div className="flex justify-between items-center text-base">
             <span className="text-mist">Interest rate</span>
             <span className="font-semibold text-cream">{rate.toFixed(1)}%</span>
           </div>
@@ -91,8 +84,8 @@ export default function MortgageCalculator() {
           />
         </div>
         <div>
-          <span className="text-base text-mist">Term</span>
-          <div className="mt-3 flex gap-2">
+          <span className="text-mist text-base">Term</span>
+          <div className="flex gap-2 mt-3">
             {[10, 15, 20, 30].map((t) => (
               <button
                 key={t}
@@ -110,17 +103,16 @@ export default function MortgageCalculator() {
           </div>
         </div>
       </div>
-
-      {/* Result */}
+      {}
       <div className="bg-ink-soft p-6 md:p-8">
-        <span className="text-base text-mist">Monthly payment</span>
-        <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-[clamp(2rem,1.4rem+2.7vw,3.25rem)] font-semibold text-accent">
+        <span className="text-mist text-base">Monthly payment</span>
+        <div className="flex items-baseline gap-2 mt-2">
+          <span className="font-semibold text-[clamp(2rem,1.4rem+2.7vw,3.25rem)] text-accent">
             <AnimatedNumber value={monthly} format={(v) => currency(v)} />
           </span>
-          <span className="text-lg text-mist">/ month</span>
+          <span className="text-mist text-lg">/ month</span>
         </div>
-        <dl className="mt-8 grid grid-cols-2 gap-6 text-base">
+        <dl className="gap-6 grid grid-cols-2 mt-8 text-base">
           <div>
             <dt className="text-mist">Loan amount</dt>
             <dd className="mt-1 font-semibold text-cream">{currency(loan)}</dd>

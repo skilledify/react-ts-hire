@@ -1,17 +1,11 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Faq } from '../data/site'
-
 interface AccordionProps {
   items: Faq[]
 }
-
-/**
- * FAQ accordion: only one item open at a time, animated with AnimatePresence.
- */
 export default function Accordion({ items }: AccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
-
   return (
     <div className="mx-auto max-w-[900px]">
       {items.map((item, i) => {
@@ -23,22 +17,22 @@ export default function Accordion({ items }: AccordionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-            className="border-b border-line"
+            className="border-line border-b"
           >
             <button
               type="button"
               onClick={() => setOpenIndex(open ? null : i)}
               aria-expanded={open}
-              className="flex w-full cursor-pointer items-center justify-between gap-4 py-6 text-left"
+              className="flex justify-between items-center gap-4 py-6 w-full text-left cursor-pointer"
             >
-              <span className="text-lg font-medium md:text-xl">{item.question}</span>
+              <span className="font-medium text-lg md:text-xl">{item.question}</span>
               <motion.span
                 animate={{ rotate: open ? 45 : 0 }}
                 transition={{ duration: 0.3 }}
-                className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-accent text-accent"
+                className="relative flex justify-center items-center border border-accent rounded-full w-9 h-9 text-accent shrink-0"
               >
-                <span className="absolute h-[14px] w-[2px] bg-accent" />
-                <span className="absolute h-[2px] w-[14px] bg-accent" />
+                <span className="absolute bg-accent w-[2px] h-[14px]" />
+                <span className="absolute bg-accent w-[14px] h-[2px]" />
               </motion.span>
             </button>
             <AnimatePresence initial={false}>
@@ -50,7 +44,7 @@ export default function Accordion({ items }: AccordionProps) {
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="pb-6 pr-10 text-lg leading-[1.7] text-mist">
+                  <p className="pr-10 pb-6 text-mist text-lg leading-[1.7]">
                     {item.answer}
                   </p>
                 </motion.div>

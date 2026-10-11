@@ -22,7 +22,7 @@
     @apply bg-ink font-sans text-cream antialiased;
   }
 
-  /* Кнопки, ссылки, картинки и стрелки — pointer при наведении (кроме disabled) */
+
   button:not(:disabled),
   [role="button"]:not(:disabled),
   a[href],
@@ -35,7 +35,7 @@
   }
 }
 
-/*--------- Decorative keyframes ---------*/
+
 
 @keyframes float {
   0%,
@@ -68,7 +68,7 @@
   animation-play-state: paused;
 }
 
-/*--------- Helpers ---------*/
+
 
 .no-scrollbar {
   scrollbar-width: none;

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { EyeIcon, EyeOffIcon } from './icons'
-
 interface PasswordInputProps {
   id: string
   value: string
@@ -9,11 +8,6 @@ interface PasswordInputProps {
   autoComplete?: string
   invalid?: boolean
 }
-
-/**
- * Password field with a show / hide visibility toggle.
- * The toggle button sits inside the input via a relative wrapper.
- */
 export default function PasswordInput({
   id,
   value,
@@ -23,7 +17,6 @@ export default function PasswordInput({
   invalid = false,
 }: PasswordInputProps) {
   const [visible, setVisible] = useState(false)
-
   return (
     <div className="relative">
       <input
@@ -34,19 +27,19 @@ export default function PasswordInput({
         placeholder={placeholder}
         autoComplete={autoComplete}
         aria-invalid={invalid}
-        className="w-full border border-line bg-ink px-4 py-3 pr-12 text-lg text-cream outline-none transition-colors focus:border-accent"
+        className="bg-ink px-4 py-3 pr-12 border border-line focus:border-accent outline-none w-full text-cream text-lg transition-colors"
       />
       <button
         type="button"
         onClick={() => setVisible((v) => !v)}
         aria-label={visible ? 'Hide password' : 'Show password'}
         aria-pressed={visible}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-mist transition-colors duration-200 hover:text-accent"
+        className="top-1/2 right-3 absolute text-mist hover:text-accent transition-colors -translate-y-1/2 duration-200"
       >
         {visible ? (
-          <EyeOffIcon className="h-5 w-5" />
+          <EyeOffIcon className="w-5 h-5" />
         ) : (
-          <EyeIcon className="h-5 w-5" />
+          <EyeIcon className="w-5 h-5" />
         )}
       </button>
     </div>

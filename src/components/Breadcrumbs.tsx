@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router'
-
 const SEGMENT_LABELS: Record<string, string> = {
   about: 'About us',
   buying: 'Buying',
@@ -7,20 +6,14 @@ const SEGMENT_LABELS: Record<string, string> = {
   selling: 'Selling',
   contact: 'Contact us',
 }
-
-/**
- * Breadcrumbs based on the current location.
- * Home is always the first crumb, then every route segment.
- */
 export default function Breadcrumbs() {
   const { pathname } = useLocation()
   const segments = pathname.split('/').filter(Boolean)
-
   return (
     <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-base">
       <Link
         to="/"
-        className="text-mist transition-colors duration-200 hover:text-accent"
+        className="text-mist hover:text-accent transition-colors duration-200"
       >
         Home
       </Link>
@@ -29,7 +22,7 @@ export default function Breadcrumbs() {
           <span aria-hidden="true" className="text-accent">
             /
           </span>
-          <span className="capitalize text-cream">
+          <span className="text-cream capitalize">
             {SEGMENT_LABELS[segment] ?? segment}
           </span>
         </span>

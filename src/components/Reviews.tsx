@@ -2,12 +2,10 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { reviews } from '../data/site'
 import { asset } from '../constants/global.constants'
-
 interface ReviewArrowProps {
   direction: 'prev' | 'next'
   onClick: () => void
 }
-
 function ReviewArrow({ direction, onClick }: ReviewArrowProps) {
   const isPrev = direction === 'prev'
   return (
@@ -15,7 +13,7 @@ function ReviewArrow({ direction, onClick }: ReviewArrowProps) {
       type="button"
       onClick={onClick}
       aria-label={isPrev ? 'Previous review' : 'Next review'}
-      className="group cursor-pointer px-1"
+      className="group px-1 cursor-pointer"
     >
       <svg
         width="23"
@@ -31,16 +29,13 @@ function ReviewArrow({ direction, onClick }: ReviewArrowProps) {
     </button>
   )
 }
-
 export default function Reviews() {
   const [[index, direction], setState] = useState<[number, number]>([0, 0])
   const current = reviews[index]
-
   const paginate = (dir: number) =>
     setState(([i]): [number, number] => [(i + dir + reviews.length) % reviews.length, dir])
-
   return (
-    <section className="relative overflow-hidden pb-20 md:pb-40">
+    <section className="relative pb-20 md:pb-40 overflow-hidden">
       <motion.img
         src={asset('/img/reviews-deco.svg')}
         alt=""
@@ -49,21 +44,19 @@ export default function Reviews() {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute -left-24 -top-40 z-0 hidden h-[1100px] select-none opacity-70 md:block"
+        className="hidden md:block -top-40 -left-24 z-0 absolute opacity-70 h-[1100px] pointer-events-none select-none"
       />
-
-      <div className="relative z-10 mx-auto max-w-[1020px] px-4 pt-24 md:pt-44">
+      <div className="z-10 relative mx-auto px-4 pt-24 md:pt-44 max-w-[1020px]">
         <motion.span
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
           aria-hidden="true"
-          className="pointer-events-none absolute left-2 top-0 select-none text-[180px] leading-none text-accent md:left-0 md:text-[260px]"
+          className="top-0 left-2 md:left-0 absolute text-[180px] text-accent md:text-[260px] leading-none pointer-events-none select-none"
         >
           &rdquo;
         </motion.span>
-
         <div className="relative min-h-[340px] sm:min-h-[300px] md:min-h-[280px]">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.blockquote
@@ -78,17 +71,16 @@ export default function Reviews() {
                 {current.text}
               </p>
               <footer className="mt-10">
-                <div className="text-[22px] font-semibold capitalize tracking-[0.01em]">
+                <div className="font-semibold text-[22px] capitalize tracking-[0.01em]">
                   {current.name}
                 </div>
-                <div className="text-lg text-mist">{current.job}</div>
+                <div className="text-mist text-lg">{current.job}</div>
               </footer>
             </motion.blockquote>
           </AnimatePresence>
         </div>
-
-        <div className="mt-8 flex items-center gap-6 sm:absolute sm:right-0 sm:bottom-0 sm:mt-0 sm:gap-7">
-          <span className="hidden h-14 w-px bg-line sm:block" />
+        <div className="sm:right-0 sm:bottom-0 sm:absolute flex items-center gap-6 sm:gap-7 mt-8 sm:mt-0">
+          <span className="hidden sm:block bg-line w-px h-14" />
           <div className="flex items-center gap-7">
             <ReviewArrow direction="prev" onClick={() => paginate(-1)} />
             <ReviewArrow direction="next" onClick={() => paginate(1)} />

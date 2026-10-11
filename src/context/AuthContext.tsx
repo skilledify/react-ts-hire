@@ -1,44 +1,27 @@
 import { createContext, useCallback, useContext, useMemo } from 'react'
 import type { ReactNode } from 'react'
 import { useEffect, useState } from 'react'
-
-/**
- * Frontend-only authentication.
- *
- * This project has no backend, so "accounts" are simulated with localStorage:
- * registered users are stored in `hire.users` and the active session in
- * `hire.session`. This keeps the Login / Sign Up flows fully interactive
- * without a server. It is intentionally simple demo data — never store
- * plain-text credentials like this in a real application.
- */
-
 export interface User {
   id: string
   name: string
   email: string
 }
-
 interface StoredUser extends User {
   password: string
 }
-
 interface AuthResult {
   ok: boolean
   error?: string
 }
-
 interface AuthContextValue {
   user: User | null
   login: (email: string, password: string) => AuthResult
   signUp: (name: string, email: string, password: string) => AuthResult
   logout: () => void
 }
-
 const USERS_KEY = 'hire.users'
 const SESSION_KEY = 'hire.session'
-
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
-
 function readUsers(): StoredUser[] {
   try {
     const raw = localStorage.getItem(USERS_KEY)
@@ -47,11 +30,9 @@ function readUsers(): StoredUser[] {
     return []
   }
 }
-
 function writeUsers(users: StoredUser[]): void {
   localStorage.setItem(USERS_KEY, JSON.stringify(users))
 }
-
 function readSession(): User | null {
   try {
     const raw = localStorage.getItem(SESSION_KEY)
@@ -60,19 +41,14 @@ function readSession(): User | null {
     return null
   }
 }
-
 function makeId(): string {
   return `u_${Math.random().toString(36).slice(2, 10)}`
 }
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-
-  // Restore the active session on mount (client-only).
   useEffect(() => {
     setUser(readSession())
   }, [])
-
   const login = useCallback((email: string, password: string): AuthResult => {
     const normalized = email.trim().toLowerCase()
     const found = readUsers().find((u) => u.email === normalized)
@@ -84,7 +60,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(SESSION_KEY, JSON.stringify(safeUser))
     return { ok: true }
   }, [])
-
   const signUp = useCallback(
     (name: string, email: string, password: string): AuthResult => {
       const normalized = email.trim().toLowerCase()
@@ -106,21 +81,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     [],
   )
-
   const logout = useCallback(() => {
     setUser(null)
     localStorage.removeItem(SESSION_KEY)
   }, [])
-
   const value = useMemo<AuthContextValue>(
     () => ({ user, login, signUp, logout }),
     [user, login, signUp, logout],
   )
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
-
-// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext)
   if (!ctx) {

@@ -10,21 +10,17 @@ import {
 } from './icons'
 import Reveal from './Reveal'
 import { AppRoutes, asset } from '../constants/global.constants'
-
 interface Social {
   Icon: ComponentType<{ className?: string }>
   label: string
 }
-
 const socials: Social[] = [
   { Icon: FacebookIcon, label: 'Facebook' },
   { Icon: InstagramIcon, label: 'Instagram' },
   { Icon: TwitterIcon, label: 'Twitter' },
   { Icon: YoutubeIcon, label: 'YouTube' },
 ]
-
 const currentYear = new Date().getFullYear()
-
 export default function Footer() {
   return (
     <footer id="footer" className="bg-ink-soft pt-16 md:pt-32">
@@ -52,7 +48,6 @@ export default function Footer() {
               ))}
             </div>
           </Reveal>
-
           {footerColumns.map((column, i) => (
             <Reveal key={column.title} delay={0.08 * (i + 1)}>
               <h3 className="mb-3 font-semibold text-[26px] capitalize tracking-[0.01em]">
@@ -80,7 +75,6 @@ export default function Footer() {
           ))}
         </div>
       </div>
-
       <div className="border-line border-t">
         <div className="flex md:flex-row flex-col justify-between items-center gap-6 mx-auto px-4 py-4 max-w-[1450px] md:text-left text-center">
           <span className="text-mist text-lg">

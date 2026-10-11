@@ -6,14 +6,11 @@ import type { Property } from '../data/site'
 import { AreaIcon, BathIcon, BedIcon } from './icons'
 import Reveal from './Reveal'
 import { AppRoutes, asset } from '../constants/global.constants'
-
 const cardWidth = 'w-[86vw] sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)]'
-
 interface PropertyCardProps {
   property: Property
   index: number
 }
-
 function PropertyCard({ property, index }: PropertyCardProps) {
   return (
     <motion.article
@@ -27,38 +24,36 @@ function PropertyCard({ property, index }: PropertyCardProps) {
         <img
           src={property.image}
           alt={property.title}
-          className="h-[280px] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 md:h-[340px]"
+          className="w-full h-[280px] md:h-[340px] object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         />
       </div>
       <div>
-        <h3 className="text-[26px] font-semibold capitalize leading-[1.26] tracking-[0.01em] transition-colors duration-300 group-hover:text-accent">
+        <h3 className="font-semibold text-[26px] group-hover:text-accent capitalize leading-[1.26] tracking-[0.01em] transition-colors duration-300">
           {property.title}
         </h3>
-        <p className="mt-1 text-lg leading-[1.7] text-mist">{property.address}</p>
+        <p className="mt-1 text-mist text-lg leading-[1.7]">{property.address}</p>
       </div>
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-mist">
         <span className="flex items-center gap-1.5 text-base">
-          <BedIcon className="h-[22px] w-[22px] text-accent" />
+          <BedIcon className="w-[22px] h-[22px] text-accent" />
           {property.beds} Beds
         </span>
         <span className="flex items-center gap-1.5 text-base">
-          <BathIcon className="h-[22px] w-[22px] text-accent" />
+          <BathIcon className="w-[22px] h-[22px] text-accent" />
           {property.baths} Bath
         </span>
         <span className="flex items-center gap-1.5 text-base">
-          <AreaIcon className="h-[22px] w-[22px] text-accent" />
+          <AreaIcon className="w-[22px] h-[22px] text-accent" />
           {property.area} Sqft.
         </span>
       </div>
     </motion.article>
   )
 }
-
 interface ArrowButtonProps {
   direction: 'prev' | 'next'
   onClick: () => void
 }
-
 function ArrowButton({ direction, onClick }: ArrowButtonProps) {
   return (
     <motion.button
@@ -67,7 +62,7 @@ function ArrowButton({ direction, onClick }: ArrowButtonProps) {
       aria-label={direction === 'prev' ? 'Previous properties' : 'Next properties'}
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.92 }}
-      className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-white/80 bg-transparent transition-colors duration-200 hover:border-accent hover:bg-accent md:h-[78px] md:w-[78px]"
+      className="flex justify-center items-center bg-transparent hover:bg-accent border border-white/80 hover:border-accent rounded-full w-16 md:w-[78px] h-16 md:h-[78px] transition-colors duration-200 cursor-pointer"
     >
       <img
         src={asset('/img/icons/arrow-slider.svg')}
@@ -77,10 +72,8 @@ function ArrowButton({ direction, onClick }: ArrowButtonProps) {
     </motion.button>
   )
 }
-
 export default function Popular() {
   const trackRef = useRef<HTMLDivElement>(null)
-
   const scrollByCard = (dir: number) => {
     const track = trackRef.current
     if (!track) return
@@ -88,35 +81,32 @@ export default function Popular() {
     const amount = card ? card.offsetWidth + 20 : track.clientWidth * 0.8
     track.scrollBy({ left: dir * amount, behavior: 'smooth' })
   }
-
   return (
     <section
       id="popular"
       className="bg-ink-soft bg-cover bg-center py-16 md:py-28"
       style={{ backgroundImage: `url("${asset('/img/slider-bg.png')}")` }}
     >
-      <div className="mx-auto max-w-[1450px] px-4">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+      <div className="mx-auto px-4 max-w-[1450px]">
+        <div className="flex flex-wrap justify-between items-end gap-6">
           <Reveal>
-            <h2 className="text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] font-semibold capitalize">
+            <h2 className="font-semibold text-[clamp(1.875rem,1.55rem+1.64vw,3rem)] capitalize">
               Popular Residence
             </h2>
           </Reveal>
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden md:flex items-center gap-7">
             <ArrowButton direction="prev" onClick={() => scrollByCard(-1)} />
             <ArrowButton direction="next" onClick={() => scrollByCard(1)} />
           </div>
         </div>
-
         <div
           ref={trackRef}
-          className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2"
+          className="flex gap-5 mt-10 pb-2 overflow-x-auto scroll-smooth snap-mandatory snap-x no-scrollbar"
         >
           {properties.map((property, i) => (
             <PropertyCard key={`${property.id}-${i}`} property={property} index={i} />
           ))}
         </div>
-
         <div className="mt-12 text-center">
           <motion.span
             whileHover={{ scale: 1.04 }}
@@ -125,7 +115,7 @@ export default function Popular() {
           >
             <Link
               to={AppRoutes.BUYING_PAGE}
-              className="inline-block bg-accent px-10 py-5 text-xl font-medium capitalize text-white transition-colors duration-200 hover:bg-accent-dark md:px-[42px] md:py-[22px] md:text-2xl"
+              className="inline-block bg-accent px-10 md:px-[42px] py-5 md:py-[22px] font-medium text-white text-xl md:text-2xl capitalize transition-colors duration-200 hover:bg-accent-dark"
             >
               View all properties
             </Link>

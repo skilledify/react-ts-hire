@@ -2,19 +2,14 @@ import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import Breadcrumbs from './Breadcrumbs'
 import { asset } from '../constants/global.constants'
-
 interface PageHeroProps {
   title: string
   subtitle?: string
   children?: ReactNode
 }
-
-/**
- * Hero for inner pages: breadcrumbs, animated title and optional subtitle.
- */
 export default function PageHero({ title, subtitle, children }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-ink-soft pb-16 pt-10 md:pb-24 md:pt-14">
+    <section className="relative bg-ink-soft pt-10 md:pt-14 pb-16 md:pb-24 overflow-hidden">
       <motion.img
         src={asset('/img/hero-deco.svg')}
         alt=""
@@ -22,9 +17,9 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
         initial={{ opacity: 0, x: 80 }}
         animate={{ opacity: 0.35, x: 0 }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-        className="pointer-events-none absolute -bottom-32 right-0 z-0 hidden h-[420px] select-none xl:block"
+        className="hidden xl:block right-0 -bottom-32 z-0 absolute h-[420px] pointer-events-none select-none"
       />
-      <div className="relative z-10 mx-auto max-w-[1450px] px-4">
+      <div className="z-10 relative mx-auto px-4 max-w-[1450px]">
         <motion.div
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,7 +31,7 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 text-[clamp(1.9rem,1.18rem+3.45vw,4.25rem)] font-semibold capitalize leading-[1.26]"
+          className="mt-6 font-semibold text-[clamp(1.9rem,1.18rem+3.45vw,4.25rem)] capitalize leading-[1.26]"
         >
           {title}
         </motion.h1>
@@ -45,7 +40,7 @@ export default function PageHero({ title, subtitle, children }: PageHeroProps) {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-[680px] text-lg leading-[1.7] text-mist"
+            className="mt-5 max-w-[680px] text-mist text-lg leading-[1.7]"
           >
             {subtitle}
           </motion.p>
